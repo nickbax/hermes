@@ -14,10 +14,11 @@ We added an optional message hashing scheme which allows for verification of the
 ## How It Works
 
 1. **Key Generation**
-   - Recipient generates a public key using their Ethereum wallet and a password
-   - The wallet signs a message containing the password to derive the key
-   - The public key can be safely shared with senders
-
+    - The recipient enters their chosen password
+    - Their wallet signs a special message: `Generate encryption key for: {password}`
+    - The signature is hashed to create a deterministic private key
+    - This private key generates the public key that senders will use
+    
 2. **Encryption**
    - Sender uses recipient's public key to encrypt a message
    - Uses AES-256-GCM with an ephemeral key for perfect forward secrecy
@@ -38,7 +39,9 @@ We added an optional message hashing scheme which allows for verification of the
 - Forward secrecy via ephemeral keys
 - Two-factor security (requires both wallet and password)
 - Messages padded to prevent length analysis
-- Optional message verification with salted hashes
+- Recipients can destroy passwords to make messages permanently unreadable while retaining Ethereum private key.
+- Optional third party message verification using salted hashes
+
 
 
 ## Message Format
