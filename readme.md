@@ -8,8 +8,7 @@ We needed a simple way to send encrypted messages to an Ethereum address. Crypto
 We wanted a way for the recipient to be able to easily destroy all messages they received, without having to destroy their private key.
 With this scheme, the recipient can store their passwords on paper or in a password manager and periodically rotate to a new password when old messages are no longer needed. 
 
-We added an optional message hashing scheme which allows for verification of the sent message to a third party. 
-
+We added an optional message hashing scheme which allows for verification of the sent message by a third party. 
 
 ## How It Works
 
@@ -54,13 +53,11 @@ We added an optional message hashing scheme which allows for verification of the
 }
 ```
 
-## Usage
-
-[Installation and usage instructions to be added]
-
 ## Development
 
 ```bash
+git clone https://github.com/nickbax/hermes.git
+cd hermes
 npm install
 npm run dev
 ```
@@ -69,13 +66,8 @@ npm run dev
 
 ```bash
 npm run build
-npm run prepare-ipfs
 ```
-
-## Contributing
-
-[Contributing guidelines to be added]
 
 ## License
 
-[License to be added]
+MIT
