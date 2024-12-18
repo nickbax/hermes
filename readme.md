@@ -1,6 +1,7 @@
 # Hermes-eth
 
 Password-protected Ethereum message encryption with optional verification. Messages are encrypted using AES-256-GCM with keys derived from Ethereum wallet signatures and passwords.
+
 ⚠️ **WARNING**: This code is unaudited and likely includes vulnerabilities. It is provided as an example and should not be used in production.
 
 ## Motivation
@@ -34,11 +35,11 @@ We added an optional message hashing scheme which allows for verification of the
 
 ## Security Properties
 
-- Perfect forward secrecy via ephemeral keys
+- Forward secrecy via ephemeral keys
 - Two-factor security (requires both wallet and password)
 - Messages padded to prevent length analysis
 - Optional message verification with salted hashes
-- Public verification requires recipient consent
+
 
 ## Message Format
 
