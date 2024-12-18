@@ -1,0 +1,4 @@
+rm -rf .next out
+npm run build
+npm run prepare-ipfs
+npm run test
