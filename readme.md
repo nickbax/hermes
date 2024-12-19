@@ -1,6 +1,7 @@
 # Hermes-eth
 
 Password-protected Ethereum message encryption with optional verification. Messages are encrypted using AES-256-GCM with keys derived from Ethereum wallet signatures and passwords.
+It is loosely based on [EIP-5630](https://eips.ethereum.org/EIPS/eip-5630). 
 
 ⚠️ **WARNING**: This code is unaudited and likely includes vulnerabilities. It is provided as an example and should not be used in production.
 
