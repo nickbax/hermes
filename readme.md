@@ -1,6 +1,7 @@
 # Hermes-eth
 
-Password-protected Ethereum message encryption with optional verification. Messages are encrypted using AES-256-GCM with keys derived from Ethereum wallet signatures and passwords.
+Password-protected Ethereum message encryption with optional verification. Messages are encrypted using AES-256-GCM with keys derived from Ethereum wallet signatures and either a secret key or password.
+
 It is loosely based on [EIP-5630](https://eips.ethereum.org/EIPS/eip-5630). 
 
 A test version is available on IPFS here: https://ipfs.io/ipfs/bafybeigjvecrlmlthwijbtcp62v2hy4fvwivcweksoyfrzcqjbjzzihtwi/
@@ -9,27 +10,27 @@ A test version is available on IPFS here: https://ipfs.io/ipfs/bafybeigjvecrlmlt
 
 ## Motivation
 We needed a simple way to send encrypted messages to an Ethereum address. Crypto users are already accustomed to storing private keys for their address.
-We wanted a way for the recipient to be able to easily destroy all messages they received, without having to destroy their private key.
-With this scheme, the recipient can store their passwords on paper or in a password manager and periodically rotate to a new password when old messages are no longer needed. 
+We wanted a way for the recipient to be able to easily destroy all messages they received, without having to destroy their Ethereum private key.
+With this scheme, the recipient can store their secret key on paper or in a password manager and periodically rotate to a new secret key when old messages are no longer needed. 
 
 We added an optional message hashing scheme which allows for verification of the sent message by a third party. 
 
 ## How It Works
 
 1. **Key Generation**
-    - The recipient enters their chosen password
-    - Their wallet signs a special message: `Generate encryption key for: {password}`
-    - The signature is hashed to create a deterministic private key
-    - This private key generates the public key that senders will use
+    - The recipient generates a strong random secret messaging key
+    - Their wallet signs a special message: `Generate encryption key for: {secret key}`
+    - The signature is hashed to create a deterministic encryption key
+    - This encryption key generates the public key that senders will use
     
 2. **Encryption**
    - Sender uses recipient's public key to encrypt a message
-   - Uses AES-256-GCM with an ephemeral key for perfect forward secrecy
+   - Uses AES-256-GCM with an ephemeral key for perfect forward secrecy when secret keys are rotated frequently
    - Messages are padded to standard sizes (64, 128, 256, 512, 1024, or 2048 bytes) to prevent length analysis
    - Optional: Can include a salted hash for message verification
 
 3. **Decryption**
-   - Recipient needs both their Ethereum wallet and original password to decrypt
+   - Recipient needs both their Ethereum wallet and original secret key to decrypt
    - If verification was enabled, recipient gets a salt they can reveal to prove message contents
 
 4. **Verification (Optional)**
@@ -40,9 +41,9 @@ We added an optional message hashing scheme which allows for verification of the
 ## Security Properties
 
 - Forward secrecy via ephemeral keys
-- Two-factor security (requires both wallet and password)
+- Two-factor security (requires both wallet private key and secret messaging key)
 - Messages padded to prevent length analysis
-- Recipients can destroy passwords to make messages permanently unreadable while retaining Ethereum private key.
+- Recipients can destroy secret messaing keys to make messages permanently unreadable while retaining Ethereum private key.
 - Optional third party message verification using salted hashes
 
 
