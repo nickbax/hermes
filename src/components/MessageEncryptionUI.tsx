@@ -18,6 +18,7 @@ import {
 import { Lock, Unlock, Copy, Key, Shield, Info, KeyRound, CheckCircle, Scale } from 'lucide-react';
 import { EthereumMessageEncryption } from '@/lib/EthereumMessageEncryption';
 
+
 export function MessageEncryptionUI() {
   // State for wallet connection
   const [account, setAccount] = useState('');
@@ -185,9 +186,12 @@ export function MessageEncryptionUI() {
                   <Info className="h-4 w-4 cursor-help" />
                 </TooltipTrigger>
                 <TooltipContent className="max-w-sm">
-                  <p>This system uses your Ethereum wallet combined with a password for enhanced security. 
-                  Messages can only be decrypted with both the correct wallet and password.
-                  Recipient should destroy their password when they no longer need access to the message.</p>
+                  <p>This system uses your Ethereum wallet combined with a second secret key or password for enhanced security. 
+                  Messages can only be decrypted with both the correct wallet and secret key.
+                  Recipient should destroy their secret key when they no longer need access to the message. 
+                  If either factor is compromised alone, your messages remain secure. For maximum security, 
+                rotate your secret key periodically and destroy old keys to permanently delete access to old messages.
+                If you choose to use a memorable password, it will provide weaker security guarantees. </p>
                 </TooltipContent>
               </Tooltip>
             </TooltipProvider>
@@ -243,12 +247,12 @@ export function MessageEncryptionUI() {
               </CardHeader>
               <CardContent className="space-y-4">
                 <div className="space-y-2">
-                  <Label htmlFor="genPassword">Encryption Password</Label>
+                  <Label htmlFor="genPassword">Encryption Key/Password</Label>
                   <div className="flex items-center gap-2">
                     <Input
                       id="genPassword"
                       type="password"
-                      placeholder="Enter a strong password"
+                      placeholder="Enter a strong secret key or password"
                       value={password}
                       onChange={(e) => setPassword(e.target.value)}
                     />
@@ -258,8 +262,8 @@ export function MessageEncryptionUI() {
                           <Info className="h-4 w-4 cursor-help" />
                         </TooltipTrigger>
                         <TooltipContent>
-                          <p>Choose a strong password. If your private key is compromised, an attacker will still need your password to decrypt messages you received.
-                            Store your password securely. It is impossible to recover if you lose it.</p>
+                          <p>Generate a secret key or strong password. If your Etheruem private key is compromised, an attacker will still need your secret key/password to decrypt messages you received.</p>
+                            <p>Store your secret key securely. It is impossible to recover if you lose it. We recommend periodically destroying your secret key when you no longer require old messages.</p>
                         </TooltipContent>
                       </Tooltip>
                     </TooltipProvider>
@@ -443,8 +447,8 @@ export function MessageEncryptionUI() {
                         <Info className="h-4 w-4 cursor-help" />
                       </TooltipTrigger>
                       <TooltipContent>
-                        <p>When enabled, the recipient can prove to others what message you sent them. 
-                        They'll need to reveal the decrypted message to do this.</p>
+                        <p>When enabled, the recipient can prove to others what message you sent them. </p>
+                        <p>They'll need to reveal the decrypted message to do this.</p>
                       </TooltipContent>
                     </Tooltip>
                   </TooltipProvider>
