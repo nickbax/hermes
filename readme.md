@@ -43,7 +43,7 @@ We added an optional message hashing scheme which allows for verification of the
 - Forward secrecy via ephemeral keys
 - Two-factor security (requires both wallet private key and secret messaging key)
 - Messages padded to prevent length analysis
-- Recipients can destroy secret messaing keys to make messages permanently unreadable while retaining Ethereum private key.
+- Recipients can destroy secret messaging keys to make messages permanently unreadable while retaining Ethereum private key.
 - Optional third party message verification using salted hashes
 
 
